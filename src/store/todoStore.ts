@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 
 export type TodoType = {
   id: number;
@@ -16,8 +16,13 @@ type Actions = {
 };
 
 export const todostore = create<States & Actions>()(
-  devtools((set) => ({
-    todos: [],
-    addTodo: (todo: TodoType) => set((state) => ({ todos: [todo, ...state.todos] })),
-  }))
+  devtools(
+    persist(
+      (set) => ({
+        todos: [],
+        addTodo: (todo: TodoType) => set((state) => ({ todos: [todo, ...state.todos] })),
+      }),
+      { name: "todoStore" }
+    )
+  )
 );
