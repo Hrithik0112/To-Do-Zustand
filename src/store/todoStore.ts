@@ -13,6 +13,8 @@ type States = {
 
 type Actions = {
   addTodo: (todo: TodoType) => void;
+  toggleTodo: (id: number, isChecked: boolean) => void;
+  deleteTodo: (id: number) => void;
 };
 
 export const todostore = create<States & Actions>()(
@@ -21,6 +23,19 @@ export const todostore = create<States & Actions>()(
       (set) => ({
         todos: [],
         addTodo: (todo: TodoType) => set((state) => ({ todos: [todo, ...state.todos] })),
+        toggleTodo: (id: number, isChecked: boolean) =>
+          set((state) => ({
+            todos: state.todos.map((item) => {
+              if (item.id === id) {
+                item.isDone = isChecked;
+              }
+              return item;
+            }),
+          })),
+        deleteTodo: (id: number) =>
+          set((state) => ({
+            todos: state.todos.filter((item) => item.id !== id),
+          })),
       }),
       { name: "todoStore" }
     )
