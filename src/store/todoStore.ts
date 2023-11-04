@@ -1,6 +1,7 @@
 import { create } from "zustand";
+import { devtools } from "zustand/middleware";
 
-type TodoType = {
+export type TodoType = {
   id: number;
   todo: string;
   isDone: boolean;
@@ -14,7 +15,9 @@ type Actions = {
   addTodo: (todo: TodoType) => void;
 };
 
-export const todostore = create<States & Actions>((set) => ({
-  todos: [],
-  addTodo: (todo: TodoType) => set((state) => ({ todos: [todo, ...state.todos] })),
-}));
+export const todostore = create<States & Actions>()(
+  devtools((set) => ({
+    todos: [],
+    addTodo: (todo: TodoType) => set((state) => ({ todos: [todo, ...state.todos] })),
+  }))
+);
