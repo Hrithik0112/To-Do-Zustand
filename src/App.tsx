@@ -49,7 +49,7 @@ function App() {
                   key={item.id}
                 >
                   <h1 className={`${item.isDone ? "line-through" : ""}`}>{item.todo}</h1>
-                  <div className="flex">
+                  <div className="flex gap-3">
                     <input
                       type="checkbox"
                       onChange={(e) => todoState.toggleTodo(item.id, e.target.checked)}
