@@ -1,3 +1,12 @@
+# To-Do App
+
+## Technologies Used :
+
+- Vite
+- React
+- TypeScript
+- Zustand
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
